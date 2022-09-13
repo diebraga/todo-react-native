@@ -2,7 +2,6 @@ import { Center, Flex } from 'native-base';
 import React from 'react';
 import { Image } from 'react-native';
 import Logo from '../../assets/Logo.png'
-// import { Container } from './styles';
 
 export const Splash: React.FC = () => {
   return (
