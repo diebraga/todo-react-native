@@ -27,6 +27,8 @@ const Home: React.FC = () => {
         mt="70px"
       >
         <TodoItem />
+        <TodoItem />
+        <TodoItem />
       </Flex>
     </Flex>
   )

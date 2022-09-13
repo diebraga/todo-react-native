@@ -2,14 +2,16 @@ import React from "react";
 import {
   NativeBaseProvider,
 } from "native-base";
-import { Splash } from "./src/screens/Splash/Splash";
 import Home from "./src/screens/Home/Home";
+import { TodosProvider } from "./src/hooks/useTodos";
 
 
 export default function App() {
   return (
     <NativeBaseProvider>
-      <Home />
+      <TodosProvider>
+        <Home />
+      </TodosProvider>
     </NativeBaseProvider>
   );
 }
