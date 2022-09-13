@@ -4,9 +4,11 @@ import { useSplash } from '../../hooks/useSplash';
 import { Splash } from '../Splash/Splash';
 import { Header } from '../../components/Header/Header';
 import TodoItem from '../../components/TodoItem/TodoItem';
+import { useTodos } from '../../hooks/useTodos';
 
 const Home: React.FC = () => {
   const { appIsReady, onLayoutRootView } = useSplash()
+  const { todos } = useTodos()
 
   if (!appIsReady) {
     return (
@@ -26,9 +28,7 @@ const Home: React.FC = () => {
       <Flex
         mt="70px"
       >
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        {todos.map(todo => <TodoItem key={todo.id} />)}
       </Flex>
     </Flex>
   )

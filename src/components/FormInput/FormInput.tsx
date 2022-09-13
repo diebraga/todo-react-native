@@ -19,6 +19,7 @@ export const FormInput: React.FC = () => {
   const onSubmit = () => {
     if (name.length < 1 || name.length > 100) return
     handleAddNewTodo(newTodo)
+    setName("")
   }
 
   return (
