@@ -4,6 +4,7 @@ import { useSplash } from '../../hooks/useSplash';
 import { Splash } from '../Splash/Splash';
 import Logo from '../../assets/logo-sm.png'
 import { Image } from 'react-native';
+import { Header } from '../../components/Header/Header';
 
 const Home: React.FC = () => {
   const { appIsReady, onLayoutRootView } = useSplash()
@@ -21,22 +22,7 @@ const Home: React.FC = () => {
       flex={1}
       onLayout={onLayoutRootView}
     >
-      <HStack
-        justifyContent="space-between"
-        bg='purple.600'
-        w="100%"
-        h="200px"
-        alignItems="center"
-        px="5"
-      >
-        <Image source={Logo} />
-        <Text color="gray.50">
-          You have {""}
-          <Text fontWeight="bold">
-            3 Todos
-          </Text>
-        </Text>
-      </HStack>
+      <Header />
     </Flex>
   )
 }
