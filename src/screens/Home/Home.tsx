@@ -1,10 +1,9 @@
-import { Flex, HStack, Text } from 'native-base';
+import { Flex } from 'native-base';
 import React from 'react';
 import { useSplash } from '../../hooks/useSplash';
 import { Splash } from '../Splash/Splash';
-import Logo from '../../assets/logo-sm.png'
-import { Image } from 'react-native';
 import { Header } from '../../components/Header/Header';
+import TodoItem from '../../components/TodoItem/TodoItem';
 
 const Home: React.FC = () => {
   const { appIsReady, onLayoutRootView } = useSplash()
@@ -23,6 +22,12 @@ const Home: React.FC = () => {
       onLayout={onLayoutRootView}
     >
       <Header />
+
+      <Flex
+        mt="70px"
+      >
+        <TodoItem />
+      </Flex>
     </Flex>
   )
 }

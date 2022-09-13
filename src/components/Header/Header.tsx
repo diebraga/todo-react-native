@@ -1,8 +1,7 @@
-import { Button, Flex, HStack, Icon, IconButton, Input, Pressable, Text } from 'native-base';
+import { Flex, HStack, Text } from 'native-base';
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
 import Logo from '../../assets/logo-sm.png'
-import { MaterialIcons } from '@expo/vector-icons';
 import { FormInput } from '../FormInput/FormInput';
 
 export const Header: React.FC = () => {
