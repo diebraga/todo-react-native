@@ -11,7 +11,8 @@ import { TodoItem } from '../@types/todo';
 type TodosContexData = {
   handleAddNewTodo: (todo: TodoItem) => Promise<void>
   todos: TodoItem[]
-  handleDeleteTodo: (id: string) => void
+  handleDeleteTodo: (id: string) => Promise<void>
+  handleMarkAsCompleted: (id: string) => Promise<void>
 }
 
 type TodosProviderProps = {
@@ -40,8 +41,20 @@ export const TodosProvider = ({ children }: TodosProviderProps) => {
     setTodos(prev => [...prev, todo])
   }
 
-  const handleDeleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id))
+  const handleDeleteTodo = async (id: string) => {
+    const arrayWithDeletedTodo = todos.filter(todo => todo.id !== id)
+    setTodos(arrayWithDeletedTodo)
+    await AsyncStorage.setItem(TODOS, JSON.stringify(arrayWithDeletedTodo))
+  }
+
+  const handleMarkAsCompleted = async (id: string) => {
+    setTodos(
+      todos.map(
+        todo => todo.id === id
+          ? { ...todo, isDone: todo.isDone ? false : true }
+          : todo
+      )
+    )
   }
 
   useEffect(() => {
@@ -52,7 +65,8 @@ export const TodosProvider = ({ children }: TodosProviderProps) => {
     <TodosContext.Provider value={{
       handleAddNewTodo,
       todos,
-      handleDeleteTodo
+      handleDeleteTodo,
+      handleMarkAsCompleted
     }}>
       {children}
     </TodosContext.Provider>

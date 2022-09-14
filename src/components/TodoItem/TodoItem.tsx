@@ -1,6 +1,6 @@
-import { Flex, HStack, Text, Button, Icon } from 'native-base';
+import { Flex, HStack, Button, Icon } from 'native-base';
 import React from 'react';
-import { Alert } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { useTodos } from '../../hooks/useTodos';
@@ -11,41 +11,67 @@ type Props = {
   id: string
 }
 
-const TodoItem: React.FC<Props> = ({ isDone, name, id }) => {
-  const { handleDeleteTodo } = useTodos()
+type IconIsDoneReturnStateReturn = {
+  checkbox: "check-box-outline-blank" | "check-box"
+  line: "none" | "line-through"
+  bgColor: "transparent" | "gray.300"
+}
 
-  const iconIsDone = (): string => {
+const TodoItem: React.FC<Props> = ({ isDone, name, id }) => {
+  const { handleDeleteTodo, handleMarkAsCompleted } = useTodos()
+
+  const iconIsDoneReturnState = (): IconIsDoneReturnStateReturn => {
     if (!isDone) {
-      return "check-box-outline-blank"
+      return {
+        checkbox: "check-box-outline-blank",
+        line: "none",
+        bgColor: "gray.300"
+      }
     } else {
-      return "check-box"
+      return {
+        checkbox: "check-box",
+        line: "line-through",
+        bgColor: "transparent"
+      }
     }
   }
 
   const onDelete = (): void => {
     handleDeleteTodo(id)
   }
+
+  const onPressMark = (): void => {
+    handleMarkAsCompleted(id)
+  }
+
   return (
     <HStack
       h="50px"
       justifyContent="space-between"
-      bg='gray.300'
+      bg={iconIsDoneReturnState().bgColor}
       w="100%"
       alignItems="center"
     >
       <Flex px='5' w="50%">
 
         <Button
-          onPress={() => Alert.alert("I was pressed")}
+          onPress={onPressMark}
           variant="unstyled"
           leftIcon={<Icon
             as={MaterialIcons}
-            name={iconIsDone()}
+            name={iconIsDoneReturnState().checkbox}
             color="blue.500"
           />}
           justifyContent="flex-start"
         >
-          {name}
+          <Text 
+          style={{ 
+            textDecorationLine: iconIsDoneReturnState().line 
+          
+          }}
+          >
+            {name}
+          </Text>
         </Button>
       </Flex>
 
