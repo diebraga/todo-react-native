@@ -32,8 +32,8 @@ const Home: React.FC = () => {
           data={todos}
           keyExtractor={item => (item.id)}
           ListEmptyComponent={() =>
-            <Text>
-              You don't have anybody listed in your event.
+            <Text textAlign="center" color='gray.500'>
+              You don't have any todo in the list.
             </Text>
           }
           renderItem={({ item }) => <TodoItem key={item.id} {...item} />

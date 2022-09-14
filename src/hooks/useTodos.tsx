@@ -25,7 +25,6 @@ export const TodosContext = createContext({} as TodosContexData)
 
 export const TodosProvider = ({ children }: TodosProviderProps) => {
   const [todos, setTodos] = useState<TodoItem[]>([])
-  console.log(todos)
 
   const loadUserStoredData = async () => {
     const storedData = await AsyncStorage.getItem(TODOS)
