@@ -3,8 +3,28 @@ import React from 'react';
 import { Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import { useTodos } from '../../hooks/useTodos';
 
-const TodoItem: React.FC = () => {
+type Props = {
+  name: string
+  isDone: boolean
+  id: string
+}
+
+const TodoItem: React.FC<Props> = ({ isDone, name, id }) => {
+  const { handleDeleteTodo } = useTodos()
+
+  const iconIsDone = (): string => {
+    if (!isDone) {
+      return "check-box-outline-blank"
+    } else {
+      return "check-box"
+    }
+  }
+
+  const onDelete = (): void => {
+    handleDeleteTodo(id)
+  }
   return (
     <HStack
       h="50px"
@@ -14,20 +34,24 @@ const TodoItem: React.FC = () => {
       alignItems="center"
     >
       <Flex px='5' w="50%">
-        {/* check-box-outline-blank */}
+
         <Button
           onPress={() => Alert.alert("I was pressed")}
           variant="unstyled"
-          leftIcon={<Icon as={MaterialIcons} name='check-box' color="blue.500" />}
+          leftIcon={<Icon
+            as={MaterialIcons}
+            name={iconIsDone()}
+            color="blue.500"
+          />}
           justifyContent="flex-start"
         >
-          Todo
+          {name}
         </Button>
       </Flex>
 
       <Flex px='5' w="50%">
         <Button
-          onPress={() => Alert.alert("I was pressed")}
+          onPress={onDelete}
           variant="unstyled"
           rightIcon={<Icon as={EvilIcons} name='trash' color="gray.700" size="lg" />}
           justifyContent="flex-end"

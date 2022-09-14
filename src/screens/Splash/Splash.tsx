@@ -6,8 +6,7 @@ import Logo from '../../assets/Logo.png'
 export const Splash: React.FC = () => {
   return (
     <Flex
-      _dark={{ bg: "purple.800" }}
-      _light={{ bg: "purple.600" }}
+      bg="gray.200"
       px={4}
       flex={1}
     >

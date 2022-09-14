@@ -18,17 +18,15 @@ const Home: React.FC = () => {
 
   return (
     <Flex
-      _dark={{ bg: "gray.200" }}
-      _light={{ bg: "gray.200" }}
+      bg="gray.200"
       flex={1}
       onLayout={onLayoutRootView}
     >
       <Header />
-
       <Flex
         mt="70px"
       >
-        {todos.map(todo => <TodoItem key={todo.id} />)}
+        {todos.map(todo => <TodoItem key={todo.id} {...todo} />)}
       </Flex>
     </Flex>
   )
