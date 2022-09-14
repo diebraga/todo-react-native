@@ -48,13 +48,13 @@ export const TodosProvider = ({ children }: TodosProviderProps) => {
   }
 
   const handleMarkAsCompleted = async (id: string) => {
-    setTodos(
-      todos.map(
-        todo => todo.id === id
-          ? { ...todo, isDone: todo.isDone ? false : true }
-          : todo
-      )
+    const arrayWithChangedTodo = todos.map(
+      todo => todo.id === id
+        ? { ...todo, isDone: todo.isDone ? false : true }
+        : todo
     )
+    setTodos(arrayWithChangedTodo)
+    await AsyncStorage.setItem(TODOS, JSON.stringify(arrayWithChangedTodo))
   }
 
   useEffect(() => {
